@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Collapse折叠面板</title>
+    <style>
+    .container {
+        max-width: 900px;
+        margin: 30px auto;
+        border-radius: 4px;
+        box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.3);
+        padding: 14px;
+    }
+
+     .collapse {
+        font-size: 16px;
+    }
+
+    .collapse .item {
+        border-top: 1px solid #ddd;
+        cursor: pointer;
+        }
+
+    .collapse .item:last-child {
+        border-bottom: 1px solid #ddd;
+    } 
+
+    .collapse .item-header {
+        display: flex;
+        align-items: center;
+        color: #303030;
+        font-weight: 500;
+        line-height: 50px;
+    }
+
+    .collapse .item-header::after {
+        content: '';
+        display: block;
+        width: 6px;
+        height: 6px;
+        border-top: 1px solid #303030;
+        border-right: 1px solid #303030;
+        margin-left: auto;
+        transform: rotate(45deg);
+        transition: all .3s;
+    }
+
+    .collapse .item.active .item-header::after {
+        transform: rotate(135deg);
+    }
+
+    .collapse .item-content {
+        font-size: 14px;
+        color: #666;
+        height: 0;
+        overflow: hidden;
+        transition: all .3s;
+    }
+
+    .collapse .item.active .item-content {
+        height: auto;
+        padding-bottom: 15px;
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <h2>Collapse折叠面板</h2>
+        <div class="collapse">
+        <div class="item active">
+            <div class="item-header">首页</div>
+            <div class="item-content">日常关注推荐<br>
+            新闻政治推荐<br>
+            娱乐八卦推荐</div>
+        </div>
+        <div class="item ">
+            <div class="item-header">动态</div>
+            <div class="item-content">日常创作<br>
+            八卦吐槽</div>
+        </div>
+        <div class="item">
+            <div class="item-header">消息</div>
+            <div class="item-content">系统消息<br>
+            其他消息</div>
+        </div>
+    </div>
+</div> 
+<div class="container">
+    <h2>Collapse折叠面板</h2>
+    <div class="collapse">
+    <div class="item active">
+        <div class="item-header">首页</div>
+        <div class="item-content">日常关注推荐<br>
+        新闻政治推荐<br>
+        娱乐八卦推荐</div>
+    </div>
+    <div class="item ">
+        <div class="item-header">动态</div>
+        <div class="item-content">日常创作<br>
+        八卦吐槽</div>
+    </div>
+    <div class="item">
+        <div class="item-header">消息</div>
+        <div class="item-content">系统消息<br>
+        其他消息</div>
+    </div>
+</div>
+</div> 
+<script>
+
+
+
+    class Collapse {
+        constructor($container, type = 1) {
+            this.$container = $container
+            this.$$items = $container.querySelectorAll('.item')
+            this.type = type
+            this.bind()
+         }
+        bind() {
+            let self = this
+            this.$$items.forEach($item => {
+                $item.onclick = function () {
+                  if(self.type === 2) {
+                      this.classList.toggle('active')
+                  } else if(self.type === 1){
+                  self.$$items.forEach($item => $item.classList.remove('active'))
+                  this.classList.add('active')
+                }
+               }
+            })
+        }
+    }
+
+new Collapse(document.querySelectorAll('.collapse')[0])
+new Collapse(document.querySelectorAll('.collapse')[1],2)
+
+</script>
+</body>
+</html>
